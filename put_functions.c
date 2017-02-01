@@ -6,7 +6,7 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 15:52:02 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/01 16:32:40 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/01 18:43:20 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int		put_flags(const char *format, t_value *value, int i)
 {
-	i++;
 	init_flags(value);
 	while (is_flag(format[i]))
 	{
