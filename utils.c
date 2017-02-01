@@ -6,11 +6,25 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 15:54:12 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/01 15:55:31 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/01 21:46:28 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+int		is_int_cv(char c)
+{
+	if (c == 'd' || c == 'D' || c == 'i' || c == 'u' || c == 'U' || c == 'x' || c == 'X' || c == 'o' || c == 'O')
+		return (1);
+	return (0);
+}
+
+int		is_str_cv(char c)
+{
+	if (c == 's' || c == 'S' || c == 'c' || c == 'C')
+		return (1);
+	return (0);
+}
 
 int		is_flag(char c)
 {

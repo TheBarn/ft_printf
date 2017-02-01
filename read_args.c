@@ -6,7 +6,7 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 15:50:54 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/01 19:24:35 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/01 20:34:32 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,7 @@ int		next_arg(const char *format, int i)
 		if (format[i + 1] == '\0')
 			return (i + 1);
 		if (format[i] == '%' && format[i + 1] == '%')
-		{
-			ft_putchar('%');
 			i++;
-		}
 		i++;
 	}
 	return (i);

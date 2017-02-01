@@ -6,7 +6,7 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 15:47:56 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/01 18:13:12 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/01 21:30:09 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,22 +56,24 @@ char	*u_long_conversion(int nb)
 	return (str);
 }
 
-char	*apply_conversion(t_value value)
+char	*apply_conversion(t_value value, t_arg arg)
 {
 	char	*str;
 
 	if (value.conversion == 'd' || value.conversion == 'D' || value.conversion == 'i')
-		str = ft_itoa(value.val);
+		str = ft_itoa(arg.nb);
 	if (value.conversion == 'o' || value.conversion == 'O')
-		str = conversion(value.val, 8);
+		str = conversion(arg.nb, 8);
 	if (value.conversion == 'x' || value.conversion == 'X')
-		str = conversion(value.val, 16);
+		str = conversion(arg.nb, 16);
 	if (value.conversion == 'u' || value.conversion == 'U')
 	{
-		if (value.val >= 0)
-			str = ft_itoa(value.val);
-		if (value.val < 0)
-			str = u_long_conversion(value.val);
+		if (arg.nb >= 0)
+			str = ft_itoa(arg.nb);
+		if (arg.nb < 0)
+			str = u_long_conversion(arg.nb);
 	}
+	if (value.conversion == 's' || value.conversion == 'S' || value.conversion == 'c')
+		str = arg.str;
 	return (str);
 }

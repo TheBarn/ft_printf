@@ -6,7 +6,7 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 16:00:46 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/01 18:30:06 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/01 22:33:47 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,11 @@ char	*add_padding(t_value value, char *str, char padding)
 	diff = value.width - ft_strlen(str);
 	if ((value.flags)[0] == '.')
 	{
-		if ((sign = str[0]) == '+' || str[0] == '-')
-			str = remove_sign(str);
 		while (i < diff)
 		{
 			str = add_to_the_left(str, padding);
 			i++;
 		}
-		str = add_to_the_left(str, sign);
 	}
 	if ((value.flags)[0] == '-')
 	{
@@ -60,12 +57,19 @@ char	*apply_flags(t_value value, char *str)
 	char	*new;
 
 	padding = ' ';
-	if ((value.flags)[1] == '+' && str[0] != '-')
+	if ((value.flags)[1] == '+' && str[0] != '-' && (value.conversion == 'd' || value.conversion == 'D' || value.conversion == 'i'))
 		str = add_to_the_left(str, '+');
+	if (value.flags[4] == '#' && (value.conversion == 'o' || value.conversion == 'O'))
+		str = add_to_the_left(str, '0');
+	if (value.flags[4] == '#' && (value.conversion == 'x' || value.conversion == 'X'))
+	{
+		str = add_to_the_left(str, 'x');
+		str = add_to_the_left(str, '0');
+	}
 	if ((value.flags)[3] == '0' && (value.flags)[0] != '-')
 		padding = '0';
-	if ((value.flags)[2] == ' ' && (value.flags)[1] == '.' && str[0] != '-')
-		str = add_to_the_left(str, padding);
+	if ((value.flags)[2] == ' ' && (value.flags)[1] == '.' && str[0] != '-' && is_int_cv(value.conversion))
+		str = add_to_the_left(str, ' ');
 	if (value.width <= ft_strlen(str))
 		return (str);
 	str = add_padding(value, str, padding);

@@ -6,7 +6,7 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 15:44:11 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/01 18:14:45 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/01 22:10:04 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,13 @@ char	*add_0_to_the_left(char *str, t_value value)
 
 char	*apply_precision(t_value value, char *str)
 {
+	char 	*new;
 	if (value.precision >= 0 && (value.conversion == 'd' || value.conversion == 'D' || value.conversion == 'i' || value.conversion == 'o' || value.conversion == 'O' || value.conversion == 'u' || value.conversion == 'U' || value.conversion == 'x' || value.conversion == 'X'))
 		str = add_0_to_the_left(str, value);
+	if (value.precision >= 0 && (value.conversion == 's' || value.conversion == 'S' || value.conversion == 'c'))
+	{
+		new = ft_strnew(value.precision + 1);
+		str = ft_strncpy(new, str, value.precision);
+	}
 	return (str);
 }
