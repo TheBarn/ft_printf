@@ -6,7 +6,7 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/31 17:50:15 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/03 23:05:25 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/05 19:39:00 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,19 @@ int		print_arg(t_value value, t_arg arg)
 	int		i;
 
 	i = 0;
-	str = apply_conversion(value, arg);
-	str = apply_precision(value, str);
-	str = apply_flags(value, str);
-	if (value.conversion == 'X' || value.conversion == 'S' || value.conversion == 'C')
-		while (i < ft_strlen(str))
-		{
-			str[i] = ft_toupper(str[i]);
-			i++;
-		}
-	ft_putstr(str);
-	total = ft_strlen(str);
+	total = 0;
+	if (value.conversion == 'S' || value.conversion == 'C')
+		total = print_warg(value, arg.wstr);
+	else
+	{
+		str = apply_conversion(value, arg);
+		str = apply_precision(value, str);
+		str = apply_flags(value, str);
+		if (value.conversion == 'X')
+			str = toupper_str(str);
+		ft_putstr(str);
+		total = ft_strlen(str);
+	}
 	return (total);
 }
 
@@ -83,16 +85,30 @@ int		get_value(t_value value, va_list argp)
 	i = 0;
 	if (is_int_cv(value.conversion))
 		arg.nb = va_arg(argp, int);
-	if (value.conversion == 's' || value.conversion == 'S')
+	if (value.conversion == 's')
 	{
 		arg.str = va_arg(argp, char*);
 		if (arg.str == NULL)
 			arg.str = "(null)";
 	}
-	if (value.conversion == 'c' || value.conversion == 'C')
+	if (value.conversion == 'S')
+	{
+		arg.wstr = va_arg(argp, wchar_t *);
+		if (arg.wstr == NULL)
+			arg.wstr = L"(null)";
+	}
+	if (value.conversion == 'C')
+	{
+		arg.wstr = (int *)malloc(2 * sizeof(int));
+		arg.wstr[0] = (int) va_arg(argp, int);
+		arg.wstr[1] = 0;
+	}
+	if (value.conversion == 'c')
 	{
 		arg.str = ft_strnew(2);
 		arg.str[0] = (char) va_arg(argp, int);
+		if (arg.str[0] == 0)
+			i++;
 	}
 	if (value.conversion == 'p')
 		arg.ptr = va_arg(argp, void *);
@@ -129,21 +145,21 @@ int		ft_printf(const char * restrict format, ...)
 	return (toto);
 }
 
-//TODO valeur de retour p modifiers
+//TODO modifiers
 
 /*
 int		main()
 {
 	int	lol;
-	char *format = "%%\n";
+	char *format = "a%Xb%Xc%Xd\n";
 	char *str = NULL;
 	char c = '!';
 	int		tmp;
 	int	i;
 
-	tmp = printf("!!!printf is : {% %}\n");
-	lol = ft_printf("ft_printf is : {% %}\n");
-	printf("valeur de printf est %d\n", tmp);
-	printf("valeur de ft_printf est %d\n", lol);
+	lol = ft_printf("%c\n", 0);
+	printf("value of ft_printf is %d\n", lol);
+	lol = printf("%c\n", 0);
+	printf("value of printf is %d\n", lol);
 	return (0);
 }*/

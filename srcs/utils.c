@@ -6,11 +6,29 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 15:54:12 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/03 23:05:32 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/05 19:39:02 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+
+char	*toupper_str(char *str)
+{
+	int		i;
+	char	*new;
+
+	i = 0;
+	new = ft_strnew(ft_strlen(str));
+	while (i < ft_strlen(str))
+	{
+		if (str[i] >= 'a' && str[i] <= 'z')
+			new[i] = ft_toupper(str[i]);
+		else
+			new[i] = str[i];
+		i++;
+	}
+	return (new);
+}
 
 char	*add_x(char *str)
 {

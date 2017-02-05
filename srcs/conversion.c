@@ -6,13 +6,13 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 15:47:56 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/03 22:20:12 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/05 18:43:36 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-char	*conversion(int nb, int base)
+char	*conversion(unsigned int nb, int base)
 {
 	char	*str;
 	int		rem;
@@ -21,11 +21,11 @@ char	*conversion(int nb, int base)
 	rem = -1;
 	if (nb == 0)
 		return ("0");
-	while (rem != 0)
+	while (nb != 0)
 	{
 		rem = nb % base;
 		nb /= base;
-		if (rem < 10 && rem != 0)
+		if (rem < 10)
 			str = add_to_the_left(str, '0' + rem);
 		if (rem > 9)
 			str = add_to_the_left(str, 'a' + rem - 10);
@@ -87,7 +87,7 @@ char	*apply_conversion(t_value value, t_arg arg)
 		if (arg.nb < 0)
 			str = u_long_conversion(arg.nb);
 	}
-	if (value.conversion == 's' || value.conversion == 'S' || value.conversion == 'c')
+	if (value.conversion == 's' || value.conversion == 'c')
 		str = arg.str;
 	if (value.conversion == 'p')
 	{
