@@ -6,7 +6,7 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/31 17:50:15 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/06 21:59:02 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/06 22:45:42 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int		print_part(const char *format, int start, int end)
 int		get_value(t_value value, va_list argp)
 {
 	int i;
-	
+
 	i = 0;
 	if (is_int_cv(value.conversion))
 		i += get_int(&value, argp);
@@ -70,7 +70,7 @@ int		get_value(t_value value, va_list argp)
 	return (i);
 }
 
-int		ft_printf(const char * restrict format, ...)
+int		ft_printf(const char *restrict format, ...)
 {
 	va_list argp;
 	int		i;

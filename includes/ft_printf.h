@@ -6,27 +6,27 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/31 17:55:31 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/06 21:58:17 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/06 22:55:58 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdarg.h>
-#include <limits.h>
-#include "../libft/libft.h"
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdarg.h>
+# include <limits.h>
+# include "../libft/libft.h"
 
-typedef	struct 	s_value
+typedef	struct	s_value
 {
-	char	flags[5];
-	int		width;
-	int		precision;
-	char	modifier;
-	char	conversion;
+	char		flags[5];
+	int			width;
+	int			precision;
+	char		modifier;
+	char		conversion;
 	union
 	{
 		int		nb;
@@ -41,7 +41,6 @@ char	*add_to_the_right(char *str, char c);
 char	*add_0_to_the_left(char *str, t_value value);
 char	*apply_precision(t_value value, char *str);
 char	*conversion(unsigned int nb, int base);
-char	*apply_conversion(t_value value);
 int		analyze_arg(const char *format, t_value *value, int i, va_list argp);
 int		next_arg(const char *format, int i);
 int		put_flags(const char *format, t_value *value, int i);
@@ -57,8 +56,9 @@ int		is_int_cv(char c);
 int		is_str_cv(char c);
 char	*add_x(char *str);
 int		is_cv(char c);
-int		print_wstr(t_value);
+int		print_wstr(t_value value);
 char	*toupper_str(char *str);
+char	*u_neg_conversion(int nb);
 int		get_int(t_value *value, va_list argp);
 int		get_str(t_value *value, va_list argp);
 int		get_wstr(t_value *value, va_list argp);
@@ -68,10 +68,18 @@ int		get_ptr(t_value *value, va_list argp);
 int		ft_wstrlen_t(wchar_t *wstr_t);
 char	*binary_conversion(char *hex);
 char	*utf8_conversion(char *small);
+char	*int_conversion(t_value value);
+char	*ptr_conversion(t_value value);
 void	print_wchar(char *str);
 int		print_str(t_value value);
 int		print_wstr(t_value value);
 int		print_int(t_value value);
 int		print_ptr(t_value value);
+void	address_conversion(unsigned long long ptr, char **str);
+char	*fill_bits(char *big, char *small);
+char	*add_zeros(char *small, int nb);
+char	*justify_zeros(char *small);
+int		ft_wstrlen_t(wchar_t *wstr_t);
+unsigned char	str_to_hex(char *str);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 15:09:25 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/06 21:15:19 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/06 22:51:43 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-char 	*hex_to_binary(char h)
+char			*hex_to_binary(char h)
 {
 	if (h == '0')
 		return ("0000");
@@ -49,7 +49,7 @@ char 	*hex_to_binary(char h)
 	return ("error");
 }
 
-char	binary_to_hex(char *bi)
+char			binary_to_hex(char *bi)
 {
 	if (ft_strncmp(bi, "0000", 4) == 0)
 		return ('0');
@@ -85,19 +85,8 @@ char	binary_to_hex(char *bi)
 		return ('f');
 	return ('?');
 }
-int		ft_wstrlen_t(wchar_t *wstr_t)
-{
-	int		i;
 
-	i = 0;
-	if (wstr_t == NULL)
-		return (0);
-	while (wstr_t[i] != 0)
-		i++;
-	return (i);
-}
-
-char	*binary_conversion(char *hex)
+char			*binary_conversion(char *hex)
 {
 	char	*str;
 	char	*tmp;
@@ -117,81 +106,7 @@ char	*binary_conversion(char *hex)
 	return (str);
 }
 
-char	*justify_zeros(char *small)
-{
-	int		i;
-	char	*new;
-
-	i = 0;
-	while (small[i] == '0')
-		i++;
-	new = ft_strdup(&small[i]);
-	free(small);
-	return (new);
-}
-
-char	*add_zeros(char *small, int nb)
-{
-	int		len;
-	char	*new;
-	int		i;
-	int		j;
-
-	len = ft_strlen(small);
-	new = ft_strnew(nb);
-	i = 0;
-	while (i < nb - len)
-	{
-		new[i] = '0';
-		i++;
-	}
-	j = 0;
-	while (i < nb)
-	{
-		new[i] = small[j];
-		i++;
-		j++;
-	}
-	free(small);
-	return (new);
-}
-
-char	*fill_bits(char *big, char *small)
-{
-	int		i;
-	int		j;
-	int		big_len;
-	char	*new;
-
-	i = 0;
-	j = 0;
-	big_len = ft_strlen(big);
-	while (i < big_len)
-	{
-		if (big[i] == 'x')
-			j++;
-		i++;
-	}
-	small = add_zeros(small, j);
-	new = ft_strnew(big_len);
-	i = 0;
-	j = 0;
-	while (i < big_len)
-	{
-		if (big[i] == 'x')
-		{
-			new[i] = small[j];
-			j++;
-		}
-		else
-			new[i] = big[i];
-		i++;
-	}
-	free(small);
-	return(new);
-}
-
-char	*utf8_conversion(char *small)
+char			*utf8_conversion(char *small)
 {
 	char	*big;
 	char	*new;
@@ -237,7 +152,7 @@ unsigned char	str_to_hex(char *str)
 		c += 16 * 14;
 	else if (str[0] == 'f')
 		c += 16 * 15;
-	else 
+	else
 		c += 16 * (str[0] - '0');
 	if (str[1] == 'a')
 		c += 10;
@@ -254,35 +169,4 @@ unsigned char	str_to_hex(char *str)
 	else 
 		c += (str[1] - '0');
 	return (c);
-}
-
-void	print_wchar(char *str)
-{
-	unsigned char	c;
-	int				i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		c = str_to_hex(&str[i]);
-		write(1, &c, 1);
-		i += 2;
-	}
-}
-
-int		print_warg(t_value value)
-{
-	char	*str;
-	int		i;
-
-	i = 0;
-	while (i < ft_wstrlen_t(value.val.wstr))
-	{
-		str = conversion(value.val.wstr[i], 16);
-		str = binary_conversion(str);
-		str = utf8_conversion(str);
-		print_wchar(str);
-		i++;
-	}
-	return (i);
 }

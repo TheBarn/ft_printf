@@ -6,7 +6,7 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 21:45:52 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/06 21:57:57 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/06 22:48:04 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		print_int(t_value value)
 	int		total;
 	char	*str;
 
-	str = apply_conversion(value);
+	str = int_conversion(value);
 	str = apply_precision(value, str);
 	str = apply_flags(value, str);
 	if (value.conversion == 'X')
@@ -32,12 +32,26 @@ int		print_str(t_value value)
 	int		total;
 	char	*str;
 
-	str = apply_conversion(value);
+	str = value.val.str;
 	str = apply_precision(value, str);
 	str = apply_flags(value, str);
 	ft_putstr(str);
 	total = ft_strlen(str);
 	return (total);
+}
+
+void	print_wchar(char *str)
+{
+	unsigned char	c;
+	int				i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		c = str_to_hex(&str[i]);
+		write(1, &c, 1);
+		i += 2;
+	}
 }
 
 int		print_wstr(t_value value)
@@ -62,7 +76,7 @@ int		print_ptr(t_value value)
 	int		total;
 	char	*str;
 
-	str = apply_conversion(value);
+	str = ptr_conversion(value);
 	str = apply_precision(value, str);
 	str = apply_flags(value, str);
 	ft_putstr(str);

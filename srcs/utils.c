@@ -6,7 +6,7 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 15:54:12 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/06 21:45:34 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/06 22:48:33 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*toupper_str(char *str)
 
 char	*add_x(char *str)
 {
-	char 	*new;
+	char	*new;
 	int		len;
 	int		i;
 

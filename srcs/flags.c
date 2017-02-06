@@ -6,13 +6,11 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 16:00:46 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/03 21:31:44 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/06 22:44:50 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-
-//TODO flag #
 
 char	*remove_sign(char *str)
 {
