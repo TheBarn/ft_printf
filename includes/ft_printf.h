@@ -6,7 +6,7 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/31 17:55:31 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/05 18:46:48 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/06 21:58:17 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,21 @@ typedef	struct 	s_value
 	int		precision;
 	char	modifier;
 	char	conversion;
+	union
+	{
+		int		nb;
+		char	*str;
+		void	*ptr;
+		wchar_t	*wstr;
+	}			val;
 }				t_value;
-
-typedef struct	s_arg
-{
-	int		nb;
-	char	*str;
-	void	*ptr;
-	wchar_t	*wstr;
-}				t_arg;
 
 char	*add_to_the_left(char *str, char c);
 char	*add_to_the_right(char *str, char c);
 char	*add_0_to_the_left(char *str, t_value value);
 char	*apply_precision(t_value value, char *str);
 char	*conversion(unsigned int nb, int base);
-char	*apply_conversion(t_value value, t_arg arg);
+char	*apply_conversion(t_value value);
 int		analyze_arg(const char *format, t_value *value, int i, va_list argp);
 int		next_arg(const char *format, int i);
 int		put_flags(const char *format, t_value *value, int i);
@@ -58,7 +57,21 @@ int		is_int_cv(char c);
 int		is_str_cv(char c);
 char	*add_x(char *str);
 int		is_cv(char c);
-int		print_warg(t_value, wchar_t *wstr);
+int		print_wstr(t_value);
 char	*toupper_str(char *str);
+int		get_int(t_value *value, va_list argp);
+int		get_str(t_value *value, va_list argp);
+int		get_wstr(t_value *value, va_list argp);
+int		get_wchar(t_value *value, va_list argp);
+int		get_char(t_value *value, va_list argp);
+int		get_ptr(t_value *value, va_list argp);
+int		ft_wstrlen_t(wchar_t *wstr_t);
+char	*binary_conversion(char *hex);
+char	*utf8_conversion(char *small);
+void	print_wchar(char *str);
+int		print_str(t_value value);
+int		print_wstr(t_value value);
+int		print_int(t_value value);
+int		print_ptr(t_value value);
 
 #endif

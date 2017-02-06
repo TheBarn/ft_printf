@@ -6,7 +6,7 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 15:09:25 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/05 19:38:57 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/06 21:15:19 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,15 +270,15 @@ void	print_wchar(char *str)
 	}
 }
 
-int		print_warg(t_value value, wchar_t *wstr)
+int		print_warg(t_value value)
 {
 	char	*str;
 	int		i;
 
 	i = 0;
-	while (i < ft_wstrlen_t(wstr))
+	while (i < ft_wstrlen_t(value.val.wstr))
 	{
-		str = conversion(wstr[i], 16);
+		str = conversion(value.val.wstr[i], 16);
 		str = binary_conversion(str);
 		str = utf8_conversion(str);
 		print_wchar(str);

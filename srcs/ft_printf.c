@@ -6,34 +6,11 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/31 17:50:15 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/05 19:39:00 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/06 21:59:02 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-
-int		print_arg(t_value value, t_arg arg)
-{
-	int		total;
-	char	*str;
-	int		i;
-
-	i = 0;
-	total = 0;
-	if (value.conversion == 'S' || value.conversion == 'C')
-		total = print_warg(value, arg.wstr);
-	else
-	{
-		str = apply_conversion(value, arg);
-		str = apply_precision(value, str);
-		str = apply_flags(value, str);
-		if (value.conversion == 'X')
-			str = toupper_str(str);
-		ft_putstr(str);
-		total = ft_strlen(str);
-	}
-	return (total);
-}
 
 int		ft_putstr_special(char *str)
 {
@@ -79,40 +56,17 @@ int		print_part(const char *format, int start, int end)
 
 int		get_value(t_value value, va_list argp)
 {
-	t_arg arg;
 	int i;
 	
 	i = 0;
 	if (is_int_cv(value.conversion))
-		arg.nb = va_arg(argp, int);
-	if (value.conversion == 's')
-	{
-		arg.str = va_arg(argp, char*);
-		if (arg.str == NULL)
-			arg.str = "(null)";
-	}
-	if (value.conversion == 'S')
-	{
-		arg.wstr = va_arg(argp, wchar_t *);
-		if (arg.wstr == NULL)
-			arg.wstr = L"(null)";
-	}
-	if (value.conversion == 'C')
-	{
-		arg.wstr = (int *)malloc(2 * sizeof(int));
-		arg.wstr[0] = (int) va_arg(argp, int);
-		arg.wstr[1] = 0;
-	}
-	if (value.conversion == 'c')
-	{
-		arg.str = ft_strnew(2);
-		arg.str[0] = (char) va_arg(argp, int);
-		if (arg.str[0] == 0)
-			i++;
-	}
+		i += get_int(&value, argp);
+	if (value.conversion == 's' || value.conversion == 'c')
+		i += get_str(&value, argp);
+	if (value.conversion == 'S' || value.conversion == 'C')
+		i += get_wstr(&value, argp);
 	if (value.conversion == 'p')
-		arg.ptr = va_arg(argp, void *);
-	i += print_arg(value, arg);
+		i += get_ptr(&value, argp);
 	return (i);
 }
 

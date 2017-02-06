@@ -6,7 +6,7 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 15:47:56 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/05 18:43:36 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/06 21:06:56 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,35 +70,35 @@ void	address_conversion(unsigned long long ptr, char **str)
 		*str = add_to_the_right(*str, 'a' + digit - 10);
 }
 
-char	*apply_conversion(t_value value, t_arg arg)
+char	*apply_conversion(t_value value)
 {
 	char	*str;
 
 	if (value.conversion == 'd' || value.conversion == 'D' || value.conversion == 'i')
-		str = ft_itoa(arg.nb);
+		str = ft_itoa(value.val.nb);
 	if (value.conversion == 'o' || value.conversion == 'O')
-		str = conversion(arg.nb, 8);
+		str = conversion(value.val.nb, 8);
 	if (value.conversion == 'x' || value.conversion == 'X')
-		str = conversion(arg.nb, 16);
+		str = conversion(value.val.nb, 16);
 	if (value.conversion == 'u' || value.conversion == 'U')
 	{
-		if (arg.nb >= 0)
-			str = ft_itoa(arg.nb);
-		if (arg.nb < 0)
-			str = u_long_conversion(arg.nb);
+		if (value.val.nb >= 0)
+			str = ft_itoa(value.val.nb);
+		if (value.val.nb < 0)
+			str = u_long_conversion(value.val.nb);
 	}
 	if (value.conversion == 's' || value.conversion == 'c')
-		str = arg.str;
+		str = value.val.str;
 	if (value.conversion == 'p')
 	{
 		str = ft_strnew(2);
-		if (arg.ptr == 0)
+		if (value.val.nb == 0)
 		{
 			str[0] = '0';
 			str[1] = '0';
 		}
 		else
-			address_conversion((unsigned long long) arg.ptr, &str);
+			address_conversion((unsigned long long) value.val.nb, &str);
 		str = add_x(str);
 	}
 	return (str);
