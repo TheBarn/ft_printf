@@ -33,6 +33,27 @@ char	*conversion(unsigned int nb, int base)
 	return (str);
 }
 
+char	*lconversion(unsigned long nb, int base)
+{
+	char	*str;
+	int		rem;
+
+	str = NULL;
+	rem = -1;
+	if (nb == 0)
+		return ("0");
+	while (nb != 0)
+	{
+		rem = nb % base;
+		nb /= base;
+		if (rem < 10)
+			str = add_to_the_left(str, '0' + rem);
+		if (rem > 9)
+			str = add_to_the_left(str, 'a' + rem - 10);
+	}
+	return (str);
+}
+
 char	*u_neg_conversion(int nb)
 {
 	char	*str;
@@ -53,7 +74,27 @@ char	*u_neg_conversion(int nb)
 	return (str);
 }
 
-void	address_conversion(unsigned long long ptr, char **str)
+char	*U_neg_conversion(long nb)
+{
+	char			*str;
+	unsigned long	num;
+	char	*str1;
+	char	*str2;
+	long	rem;
+	long	q;
+
+	num = (unsigned long)nb + (1844674407 * 10000000000) + 3709551616;
+	rem = num % 10000000000;
+	q = (num - rem) / 10000000000;
+	str1 = ft_ltoa(q);
+	str2 = ft_ltoa(rem);
+	str = ft_strnew(ft_strlen(str1) + ft_strlen(str2));
+	str = ft_strcat(str, str1);
+	str = ft_strcat(str, str2);
+	return (str);
+}
+
+void	address_conversion(unsigned long ptr, char **str)
 {
 	char digit;
 

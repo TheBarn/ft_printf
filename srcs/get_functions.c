@@ -22,6 +22,16 @@ int		get_int(t_value *value, va_list argp)
 	return (i);
 }
 
+int		get_long(t_value *value, va_list argp)
+{
+	int		i;
+
+	i = 0;
+	value->val.lg = va_arg(argp, long);
+	i += print_long(*value);
+	return (i);
+}
+
 int		get_str(t_value *value, va_list argp)
 {
 	int		i;
@@ -57,7 +67,7 @@ int		get_wstr(t_value *value, va_list argp)
 	}
 	if (value->conversion == 'C')
 	{
-		value->val.wstr = (int *)malloc(2 * sizeof(int));
+				value->val.wstr = (int *)malloc(2 * sizeof(int));
 		value->val.wstr[0] = (int)va_arg(argp, int);
 		value->val.wstr[1] = 0;
 	}
@@ -70,7 +80,7 @@ int		get_ptr(t_value *value, va_list argp)
 	int		i;
 
 	i = 0;
-	value->val.ptr = va_arg(argp, void *);
+	value->val.ptr = (unsigned long) va_arg(argp, void *);
 	i += print_ptr(*value);
 	return (i);
 }

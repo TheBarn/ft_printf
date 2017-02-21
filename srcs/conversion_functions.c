@@ -32,18 +32,39 @@ char	*int_conversion(t_value value)
 	return (str);
 }
 
+char	*long_conversion(t_value value)
+{
+	char	*str;
+	
+	str = NULL;	
+	if (value.conversion == 'D' || value.conversion == 'd' || value.conversion == 'i')
+		str = ft_ltoa(value.val.lg);
+	else if (value.conversion == 'O' || value.conversion == 'o')
+		str = lconversion(value.val.lg, 8);
+	else if (value.conversion == 'U' || value.conversion == 'u')
+	{
+		if (value.val.lg >= 0)
+			str = ft_ltoa(value.val.lg);
+		if (value.val.lg < 0)
+			str = U_neg_conversion(value.val.lg);
+	}
+	else if (value.conversion == 'x' || value.conversion == 'X')
+		str = lconversion(value.val.lg, 16);
+	return (str);
+}
+
 char	*ptr_conversion(t_value value)
 {
 	char	*str;
 
 	str = ft_strnew(2);
-	if (value.val.nb == 0)
+	if (value.val.ptr == 0)
 	{
 		str[0] = '0';
 		str[1] = '0';
 	}
 	else
-		address_conversion((unsigned long long)value.val.nb, &str);
+		address_conversion(value.val.ptr, &str);
 	str = add_x(str);
 	return (str);
 }

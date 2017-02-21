@@ -19,7 +19,7 @@ char	*toupper_str(char *str)
 
 	i = 0;
 	new = ft_strnew(ft_strlen(str));
-	while (i < ft_strlen(str))
+	while ((size_t) i < ft_strlen(str))
 	{
 		if (str[i] >= 'a' && str[i] <= 'z')
 			new[i] = ft_toupper(str[i]);
@@ -33,14 +33,13 @@ char	*toupper_str(char *str)
 char	*add_x(char *str)
 {
 	char	*new;
-	int		len;
 	int		i;
 
 	new = ft_strnew(ft_strlen(str) + 1);
 	new[0] = '0';
 	new[1] = 'x';
 	i = 0;
-	while (i < ft_strlen(str) - 1)
+	while ((size_t) i < ft_strlen(str) - 1)
 	{
 		new[2 + i] = str[1 + i];
 		i++;
@@ -50,7 +49,7 @@ char	*add_x(char *str)
 
 int		is_int_cv(char c)
 {
-	if (c == 'd' || c == 'D' || c == 'i' || c == 'u' || c == 'U' || c == 'x' || c == 'X' || c == 'o' || c == 'O')
+	if (c == 'd' || c == 'i' || c == 'u' || c == 'x' || c == 'X' || c == 'o')
 		return (1);
 	return (0);
 }

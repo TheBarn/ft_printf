@@ -26,12 +26,22 @@ char	*add_padding(t_value value, char *str, char padding)
 {
 	int		diff;
 	int		i;
-	char	sign;
 
 	i = 0;
 	diff = value.width - ft_strlen(str);
 	if ((value.flags)[0] == '.')
 	{
+		if (is_int_cv(value.conversion) && value.precision != -1)
+		{
+			while (i < value.precision - (int)ft_strlen(str))
+			{	
+				str = add_to_the_left(str, padding);
+				i++;
+			}
+			padding = ' ';
+		}
+		if (value.flags[1] == '+' || value.flags[2] == ' ')
+			i++;
 		while (i < diff)
 		{
 			str = add_to_the_left(str, padding);
@@ -52,11 +62,8 @@ char	*add_padding(t_value value, char *str, char padding)
 char	*apply_flags(t_value value, char *str)
 {
 	char	padding;
-	char	*new;
 
 	padding = ' ';
-	if ((value.flags)[1] == '+' && str[0] != '-' && (value.conversion == 'd' || value.conversion == 'D' || value.conversion == 'i'))
-		str = add_to_the_left(str, '+');
 	if (value.flags[4] == '#' && (value.conversion == 'o' || value.conversion == 'O'))
 		str = add_to_the_left(str, '0');
 	if (value.flags[4] == '#' && (value.conversion == 'x' || value.conversion == 'X'))
@@ -66,10 +73,11 @@ char	*apply_flags(t_value value, char *str)
 	}
 	if ((value.flags)[3] == '0' && (value.flags)[0] != '-')
 		padding = '0';
-	if ((value.flags)[2] == ' ' && (value.flags)[1] == '.' && str[0] != '-' && is_int_cv(value.conversion))
+	if ((size_t) value.width > ft_strlen(str))
+		str = add_padding(value, str, padding);
+	if ((value.flags)[1] == '+' && str[0] != '-' && (value.conversion == 'd' || value.conversion == 'D' || value.conversion == 'i'))
+		str = add_to_the_left(str, '+');
+	if ((value.flags)[2] == ' ' && (value.flags)[1] == '.' && str[0] != '-' && is_int_cv(value.conversion) && value.conversion != 'u')
 		str = add_to_the_left(str, ' ');
-	if (value.width <= ft_strlen(str))
-		return (str);
-	str = add_padding(value, str, padding);
 	return (str);
 }

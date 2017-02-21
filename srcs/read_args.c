@@ -46,6 +46,8 @@ int		next_arg(const char *format, int i)
 				k++;
 			if (format[i + k] == '%')
 				i = i + k;
+			else 
+				return (i);
 		}
 		i++;
 	}

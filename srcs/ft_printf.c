@@ -19,13 +19,13 @@ int		ft_putstr_special(char *str)
 
 	i = 0;
 	d = 0;
-	while (i < ft_strlen(str))
+	while ((size_t) i < ft_strlen(str))
 	{
 		if (str[i] == '%')
 		{
 			if (str[i + 1] == '%')
 				i++;
-			if (str[i + 1] == ' ')
+			else if (str[i + 1] == ' ')
 			{
 				i++;
 				while (str[i] == ' ')
@@ -59,14 +59,16 @@ int		get_value(t_value value, va_list argp)
 	int i;
 
 	i = 0;
-	if (is_int_cv(value.conversion))
+	if (is_int_cv(value.conversion) && value.modifier != 'l')
 		i += get_int(&value, argp);
-	if (value.conversion == 's' || value.conversion == 'c')
+	else if (value.conversion == 's' || value.conversion == 'c')
 		i += get_str(&value, argp);
-	if (value.conversion == 'S' || value.conversion == 'C')
+	else if (value.conversion == 'S' || value.conversion == 'C')
 		i += get_wstr(&value, argp);
-	if (value.conversion == 'p')
+	else if (value.conversion == 'p')
 		i += get_ptr(&value, argp);
+	else if (value.conversion == 'D' || value.conversion == 'O' || value.conversion == 'U' || value.modifier == 'l')
+	i += get_long(&value, argp);
 	return (i);
 }
 
@@ -101,19 +103,20 @@ int		ft_printf(const char *restrict format, ...)
 
 //TODO modifiers
 
-/*
 int		main()
 {
 	int	lol;
-	char *format = "a%Xb%Xc%Xd\n";
-	char *str = NULL;
+	char *format = "%4.9s";
+	char *str = "42";
 	char c = '!';
 	int		tmp;
 	int	i;
+	long lg;
 
-	lol = ft_printf("%c\n", 0);
+	i = 0;
+	lol = ft_printf(format, str);
 	printf("value of ft_printf is %d\n", lol);
-	lol = printf("%c\n", 0);
+	lol = printf(format, str);
 	printf("value of printf is %d\n", lol);
 	return (0);
-}*/
+}

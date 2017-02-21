@@ -27,6 +27,21 @@ int		print_int(t_value value)
 	return (total);
 }
 
+int		print_long(t_value value)
+{
+	int		total;
+	char	*str;
+	
+	str = long_conversion(value);
+	str = apply_precision(value, str);
+	str = apply_flags(value, str);
+	if (value.conversion == 'X')
+		str = toupper_str(str);
+	ft_putstr(str);
+	total = ft_strlen(str);
+	return (total);
+}
+
 int		print_str(t_value value)
 {
 	int		total;
