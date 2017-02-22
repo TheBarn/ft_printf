@@ -6,7 +6,7 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 15:52:02 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/03 21:32:14 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/22 11:56:02 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,15 @@ int		put_modifier(const char *format, t_value *value, int i)
 		value->modifier = format[i];
 		i++;
 		if (format[i] == 'h')
+		{
 			value->modifier = 'H';
+			i++;
+		}
 		if (format[i] == 'l')
+		{
 			value->modifier = 'L';
+			i++;
+		}
 	}
 	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/31 17:55:31 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/06 22:55:58 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/22 16:03:14 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,18 @@ typedef	struct	s_value
 	char		conversion;
 	union
 	{
-		int		nb;
-		long	lg;
-		char	*str;
+		char		c;
+		unsigned char		uc;
+		int			nb;
+		unsigned int	u;
+		long		lg;
+		unsigned long	U;
+		long long 	llg;
+		unsigned long long UL;
+		size_t		z;
+		intmax_t	j;
+		uintmax_t	uj;
+		char		*str;
 		unsigned long ptr;
 		wchar_t	*wstr;
 	}			val;
@@ -42,7 +51,7 @@ char	*add_to_the_right(char *str, char c);
 char	*add_0_to_the_left(char *str, t_value value);
 char	*apply_precision(t_value value, char *str);
 char	*conversion(unsigned int nb, int base);
-char	*lconversion(unsigned long nb, int base);
+char	*jconversion(uintmax_t nb, int base);
 int		analyze_arg(const char *format, t_value *value, int i, va_list argp);
 int		next_arg(const char *format, int i);
 int		put_flags(const char *format, t_value *value, int i);
@@ -54,33 +63,45 @@ void	init_flags(t_value *value);
 char	*add_padding(t_value value, char *str, char padding);
 char	*apply_flags(t_value value, char *str);
 char	*remove_sign(char *str);
+int		ft_min(int a, int b);
 int		is_int_cv(char c);
 int		is_str_cv(char c);
-char	*add_x(char *str);
 int		is_cv(char c);
-char	*ft_ltoa(long n);
-int		print_wstr(t_value value);
+char	*ft_utoa(unsigned int n);
+char	*ft_uimaxtoa(uintmax_t n);
+char	*ft_imaxtoa(intmax_t n);
 char	*toupper_str(char *str);
-char	*u_neg_conversion(int nb);
-char	*U_neg_conversion(long nb);
 int		get_long(t_value *value, va_list argp);
+int		get_llong(t_value *value, va_list argp);
+int		get_size_t(t_value *value, va_list argp);
+int		get_imax(t_value *value, va_list argp);
 int		get_int(t_value *value, va_list argp);
+int		get_char(t_value *value, va_list argp);
 int		get_str(t_value *value, va_list argp);
 int		get_wstr(t_value *value, va_list argp);
 int		get_wchar(t_value *value, va_list argp);
 int		get_char(t_value *value, va_list argp);
+int		get_no(t_value *value);
 int		get_ptr(t_value *value, va_list argp);
 int		ft_wstrlen_t(wchar_t *wstr_t);
 char	*binary_conversion(char *hex);
 char	*utf8_conversion(char *small);
 char	*int_conversion(t_value value);
+char	*char_conversion(t_value value);
 char	*long_conversion(t_value value);
+char	*llong_conversion(t_value value);
+char	*size_t_conversion(t_value value);
+char	*imax_conversion(t_value value);
 char	*ptr_conversion(t_value value);
-void	print_wchar(char *str);
+int		print_wchar(char *str);
+int		print_char(t_value value);
 int		print_str(t_value value);
 int		print_wstr(t_value value);
 int		print_int(t_value value);
 int		print_long(t_value value);
+int		print_llong(t_value value);
+int		print_size_t(t_value value);
+int		print_imax(t_value value);
 int		print_ptr(t_value value);
 void	address_conversion(unsigned long ptr, char **str);
 char	*fill_bits(char *big, char *small);

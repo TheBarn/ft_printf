@@ -6,7 +6,7 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 15:47:56 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/06 22:43:35 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/22 14:17:30 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*conversion(unsigned int nb, int base)
 	return (str);
 }
 
-char	*lconversion(unsigned long nb, int base)
+char	*jconversion(uintmax_t nb, int base)
 {
 	char	*str;
 	int		rem;
@@ -54,46 +54,6 @@ char	*lconversion(unsigned long nb, int base)
 	return (str);
 }
 
-char	*u_neg_conversion(int nb)
-{
-	char	*str;
-	char	*str1;
-	char	*str2;
-	unsigned int	num;
-	int	rem;
-	int	q;
-
-	num = (unsigned int)nb + 4294967295 + 1;
-	rem = num % 100000;
-	q = (num - rem) / 100000;
-	str1 = ft_itoa(q);
-	str2 = ft_itoa(rem);
-	str = ft_strnew(ft_strlen(str1) + ft_strlen(str2));
-	str = ft_strcat(str, str1);
-	str = ft_strcat(str, str2);
-	return (str);
-}
-
-char	*U_neg_conversion(long nb)
-{
-	char			*str;
-	unsigned long	num;
-	char	*str1;
-	char	*str2;
-	long	rem;
-	long	q;
-
-	num = (unsigned long)nb + (1844674407 * 10000000000) + 3709551616;
-	rem = num % 10000000000;
-	q = (num - rem) / 10000000000;
-	str1 = ft_ltoa(q);
-	str2 = ft_ltoa(rem);
-	str = ft_strnew(ft_strlen(str1) + ft_strlen(str2));
-	str = ft_strcat(str, str1);
-	str = ft_strcat(str, str2);
-	return (str);
-}
-
 void	address_conversion(unsigned long ptr, char **str)
 {
 	char digit;
@@ -101,8 +61,8 @@ void	address_conversion(unsigned long ptr, char **str)
 	digit = ptr % 16;
 	if (ptr > 0)
 		address_conversion(ptr / 16, str);
-	if (digit < 10)
+	if (digit < 10 && ptr != 0)
 		*str = add_to_the_right(*str, '0' + digit);
-	else
+	else if (ptr != 0)
 		*str = add_to_the_right(*str, 'a' + digit - 10);
 }

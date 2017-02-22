@@ -6,7 +6,7 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 15:44:11 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/06 22:47:27 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/22 15:36:35 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,13 @@ char	*add_0_to_the_left(char *str, t_value value)
 {
 	int		i;
 	int		nb;
+	int		len;
 
 	i = 0;
-	nb = value.precision - ft_strlen(str);
+	len = ft_strlen(str);
+	if (str[0] == '-')
+		len--;
+	nb = value.precision - len;
 	while (i < nb)
 	{
 		str = add_to_the_left(str, '0');
@@ -57,9 +61,9 @@ char	*apply_precision(t_value value, char *str)
 	
 	if (value.precision == 0)
 		return (NULL);
-	if (value.precision >= 0 && (value.conversion == 'd' || value.conversion == 'D' || value.conversion == 'i' || value.conversion == 'o' || value.conversion == 'O' || value.conversion == 'u' || value.conversion == 'U' || value.conversion == 'x' || value.conversion == 'X'))
+	if (!is_str_cv(value.conversion))
 		str = add_0_to_the_left(str, value);
-	if (value.precision >= 0 && (value.conversion == 's' || value.conversion == 'S' || value.conversion == 'c') && value.precision < ft_strlen(str))
+	else if (value.precision >= 0 && (value.conversion == 's' || value.conversion == 'S' || value.conversion == 'c') && value.precision < ft_strlen(str))
 	{
 		tmp = str;
 		str = ft_strnew(value.precision + 1);

@@ -6,7 +6,7 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 15:54:12 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/06 22:48:33 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/22 15:40:53 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,11 @@ char	*toupper_str(char *str)
 	return (new);
 }
 
-char	*add_x(char *str)
+int		ft_min(int a, int b)
 {
-	char	*new;
-	int		i;
-
-	new = ft_strnew(ft_strlen(str) + 1);
-	new[0] = '0';
-	new[1] = 'x';
-	i = 0;
-	while ((size_t) i < ft_strlen(str) - 1)
-	{
-		new[2 + i] = str[1 + i];
-		i++;
-	}
-	return (new);
+	if (a < b)
+		return (a);
+	return (b);
 }
 
 int		is_int_cv(char c)

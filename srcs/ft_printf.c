@@ -6,11 +6,14 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/31 17:50:15 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/06 22:45:42 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/22 16:03:10 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+
+//TODO
+#include "locale.h"
 
 int		ft_putstr_special(char *str)
 {
@@ -59,16 +62,26 @@ int		get_value(t_value value, va_list argp)
 	int i;
 
 	i = 0;
-	if (is_int_cv(value.conversion) && value.modifier != 'l')
+	if (value.modifier == 'H' && (value.conversion >= 'a' || value.conversion == 'X'))  //VERY BAD SH** PLEASE MAKE DEFINE
+		i+= get_char(&value, argp);
+	else if (value.modifier == 'j')
+		i+= get_imax(&value, argp);
+	else if (value.modifier == 'z')
+		i+= get_size_t(&value, argp);
+	else if (is_int_cv(value.conversion) && value.modifier != 'l' && value.modifier != 'L')
 		i += get_int(&value, argp);
-	else if (value.conversion == 's' || value.conversion == 'c')
+	else if ((value.conversion == 's' || value.conversion == 'c') && value.modifier != 'l')
 		i += get_str(&value, argp);
-	else if (value.conversion == 'S' || value.conversion == 'C')
+	else if (value.conversion == 'S' || value.conversion == 'C' || ((value.conversion == 'c' || value.conversion == 's') && value.modifier == 'l'))
 		i += get_wstr(&value, argp);
 	else if (value.conversion == 'p')
 		i += get_ptr(&value, argp);
 	else if (value.conversion == 'D' || value.conversion == 'O' || value.conversion == 'U' || value.modifier == 'l')
-	i += get_long(&value, argp);
+		i += get_long(&value, argp);
+	else if (value.modifier == 'L')
+		i += get_llong(&value, argp);
+	else
+		i += get_no(&value);
 	return (i);
 }
 
@@ -92,8 +105,7 @@ int		ft_printf(const char *restrict format, ...)
 		toto += print_part(format, k, i);
 		i = analyze_arg(format, &value, i, argp);
 		k = i;
-		if (is_cv(value.conversion))
-			toto += get_value(value, argp);
+		toto += get_value(value, argp);
 		i = next_arg(format, i);
 	}
 	toto += print_part(format, k, i);
@@ -106,17 +118,19 @@ int		ft_printf(const char *restrict format, ...)
 int		main()
 {
 	int	lol;
-	char *format = "%4.9s";
+	char *format = "{%.7S}";
 	char *str = "42";
 	char c = '!';
 	int		tmp;
 	int	i;
 	long lg;
 
+//	 L"我是一只猫。");
 	i = 0;
-	lol = ft_printf(format, str);
-	printf("value of ft_printf is %d\n", lol);
-	lol = printf(format, str);
-	printf("value of printf is %d\n", lol);
+	setlocale(LC_ALL, "");
+	lol = ft_printf(format, L"我是");
+	printf("\nvalue of ft_printf is %d\n", lol);
+	lol = printf(format, L"我是");
+	printf("\nvalue of printf is %d\n", lol);
 	return (0);
 }
