@@ -6,7 +6,7 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 15:50:54 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/22 14:55:17 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/23 11:55:57 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ int		analyze_arg(const char *format, t_value *value, int i, va_list argp)
 	i = put_precision(format, value, i, argp);
 	i = put_modifier(format, value, i);
 	value->conversion = format[i];
-	return (i + 1);
+	if (format[i] != '\0')
+		i++;
+	return (i);
 }
 
 int		next_arg(const char *format, int i)

@@ -6,7 +6,7 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 22:14:09 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/22 14:30:48 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/23 14:16:05 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,21 @@ char	*char_conversion(t_value value)
 		str = conversion((int) value.val.uc, 16);
 	if (value.conversion == 'u')
 		str = ft_utoa((unsigned int) value.val.uc);
+	return (str);
+}
+
+char	*short_conversion(t_value value)
+{
+	char	*str;
+
+	if (value.conversion == 'd' || value.conversion == 'i')
+		str = ft_itoa(value.val.shrt);
+	if (value.conversion == 'o')
+		str = shrtconversion(value.val.ushrt, 8);
+	if (value.conversion == 'x' || value.conversion == 'X')
+		str = shrtconversion(value.val.ushrt, 16);
+	if (value.conversion == 'u')
+		str = ft_utoa(value.val.ushrt);
 	return (str);
 }
 

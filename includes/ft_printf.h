@@ -6,7 +6,7 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/31 17:55:31 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/22 16:03:14 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/23 14:26:34 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ typedef	struct	s_value
 	{
 		char		c;
 		unsigned char		uc;
+		short		shrt;
+		unsigned	ushrt;
 		int			nb;
 		unsigned int	u;
 		long		lg;
@@ -51,6 +53,7 @@ char	*add_to_the_right(char *str, char c);
 char	*add_0_to_the_left(char *str, t_value value);
 char	*apply_precision(t_value value, char *str);
 char	*conversion(unsigned int nb, int base);
+char	*shrtconversion(unsigned short nb, int base);
 char	*jconversion(uintmax_t nb, int base);
 int		analyze_arg(const char *format, t_value *value, int i, va_list argp);
 int		next_arg(const char *format, int i);
@@ -76,6 +79,7 @@ int		get_llong(t_value *value, va_list argp);
 int		get_size_t(t_value *value, va_list argp);
 int		get_imax(t_value *value, va_list argp);
 int		get_int(t_value *value, va_list argp);
+int		get_short(t_value *value, va_list argp);
 int		get_char(t_value *value, va_list argp);
 int		get_str(t_value *value, va_list argp);
 int		get_wstr(t_value *value, va_list argp);
@@ -88,16 +92,18 @@ char	*binary_conversion(char *hex);
 char	*utf8_conversion(char *small);
 char	*int_conversion(t_value value);
 char	*char_conversion(t_value value);
+char	*short_conversion(t_value value);
 char	*long_conversion(t_value value);
 char	*llong_conversion(t_value value);
 char	*size_t_conversion(t_value value);
 char	*imax_conversion(t_value value);
 char	*ptr_conversion(t_value value);
-int		print_wchar(char *str);
+int		print_wchar(char *str, t_value value);
 int		print_char(t_value value);
 int		print_str(t_value value);
 int		print_wstr(t_value value);
 int		print_int(t_value value);
+int		print_short(t_value value);
 int		print_long(t_value value);
 int		print_llong(t_value value);
 int		print_size_t(t_value value);

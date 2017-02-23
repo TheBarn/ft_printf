@@ -6,7 +6,7 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 21:28:31 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/22 14:54:44 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/23 14:11:04 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,19 @@ int		get_char(t_value *value, va_list argp)
 	else
 		value->val.c = (char) va_arg(argp, int);
 	i += print_char(*value);
+	return (i);
+}
+
+int		get_short(t_value *value, va_list argp)
+{
+	int		i;
+
+	i = 0;
+	if (value->conversion == 'u' || value->conversion == 'o' || value->conversion == 'x' || value->conversion == 'U' || value->conversion == 'O' || value->conversion == 'X')
+		value->val.ushrt = va_arg(argp, unsigned int);
+	else
+		value->val.shrt = va_arg(argp, int);
+	i += print_short(*value);
 	return (i);
 }
 
@@ -71,7 +84,13 @@ int		get_size_t(t_value *value, va_list argp)
 
 	i = 0;
 	value->val.z = va_arg(argp, size_t);
-	i += print_size_t(*value);
+	if (value->val.z > LLONG_MAX && value->conversion != 'u' && value->conversion != 'U' && value->conversion != 'o' && value->conversion != 'O' && value->conversion != 'x' && value->conversion != 'X')
+	{
+		value->val.j = LLONG_MIN;
+		i += print_imax(*value);
+	}
+	else
+		i += print_size_t(*value);
 	return (i);
 }
 
@@ -103,10 +122,13 @@ int		get_str(t_value *value, va_list argp)
 	{
 		value->val.str = ft_strnew(2);
 		value->val.str[0] = (char)va_arg(argp, int);
-		if (value->val.str[0] == 0)
-			i++;
 	}
 	i += print_str(*value);
+	if (value->val.str[0] == 0 && value->conversion == 'c')
+	{
+		ft_putchar('\0');
+		i++;
+	}
 	return (i);
 }
 
@@ -123,11 +145,14 @@ int		get_wstr(t_value *value, va_list argp)
 	}
 	if (value->conversion == 'C' || value->conversion == 'c')
 	{
-				value->val.wstr = (int *)malloc(2 * sizeof(int));
+		value->val.wstr = (int *)malloc(2 * sizeof(int));
 		value->val.wstr[0] = (int)va_arg(argp, int);
 		value->val.wstr[1] = 0;
 		if (value->val.wstr[0] == 0)
+		{
+			ft_putchar('\0');
 			i++;
+		}
 	}
 	i += print_wstr(*value);
 	return (i);

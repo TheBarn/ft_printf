@@ -6,7 +6,7 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 15:44:11 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/22 15:36:35 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/23 13:42:56 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	*apply_precision(t_value value, char *str)
 {
 	char	*tmp;
 	
-	if (value.precision == 0)
+	if (value.precision == 0 && !((value.conversion == 'o' || value.conversion == 'O') && value.flags[4] == '#' && value.val.u != 0))
 		return (NULL);
 	if (!is_str_cv(value.conversion))
 		str = add_0_to_the_left(str, value);

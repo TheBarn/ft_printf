@@ -6,11 +6,32 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 15:47:56 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/22 14:17:30 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/23 14:26:29 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+
+char	*shrtconversion(unsigned short nb, int base)
+{
+	char	*str;
+	int		rem;
+
+	str = NULL;
+	rem = -1;
+	if (nb == 0)
+		return ("0");
+	while (nb != 0)
+	{
+		rem = nb % base;
+		nb /= base;
+		if (rem < 10)
+			str = add_to_the_left(str, '0' + rem);
+		if (rem > 9)
+			str = add_to_the_left(str, 'a' + rem - 10);
+	}
+	return (str);
+}
 
 char	*conversion(unsigned int nb, int base)
 {

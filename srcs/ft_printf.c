@@ -6,7 +6,7 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/31 17:50:15 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/22 16:03:10 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/23 14:26:21 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int		print_part(const char *format, int start, int end)
 {
 	char	*str;
 	int		i;
-
+	
 	str = ft_strsub(format, start, end - start);
 	i = ft_strlen(str);
 	i -= ft_putstr_special(str);
@@ -68,6 +68,8 @@ int		get_value(t_value value, va_list argp)
 		i+= get_imax(&value, argp);
 	else if (value.modifier == 'z')
 		i+= get_size_t(&value, argp);
+	else if (value.modifier == 'h' && (value.conversion >= 'a' || value.conversion == 'X'))
+		i+= get_short(&value, argp);
 	else if (is_int_cv(value.conversion) && value.modifier != 'l' && value.modifier != 'L')
 		i += get_int(&value, argp);
 	else if ((value.conversion == 's' || value.conversion == 'c') && value.modifier != 'l')
@@ -80,7 +82,7 @@ int		get_value(t_value value, va_list argp)
 		i += get_long(&value, argp);
 	else if (value.modifier == 'L')
 		i += get_llong(&value, argp);
-	else
+	else if (value.conversion != 0)
 		i += get_no(&value);
 	return (i);
 }
@@ -114,11 +116,11 @@ int		ft_printf(const char *restrict format, ...)
 }
 
 //TODO modifiers
-
+/*
 int		main()
 {
 	int	lol;
-	char *format = "{%.7S}";
+	char *format = "%hO";
 	char *str = "42";
 	char c = '!';
 	int		tmp;
@@ -128,9 +130,9 @@ int		main()
 //	 L"我是一只猫。");
 	i = 0;
 	setlocale(LC_ALL, "");
-	lol = ft_printf(format, L"我是");
+	lol = ft_printf(format, 0);
 	printf("\nvalue of ft_printf is %d\n", lol);
-	lol = printf(format, L"我是");
+	lol = printf(format, 0);
 	printf("\nvalue of printf is %d\n", lol);
 	return (0);
-}
+}*/
