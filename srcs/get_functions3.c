@@ -1,44 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   get_functions3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/24 22:44:03 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/24 11:23:46 by barnout          ###   ########.fr       */
+/*   Created: 2017/02/24 10:21:13 by barnout           #+#    #+#             */
+/*   Updated: 2017/02/24 10:21:30 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-static int				u_count_digit(unsigned int n)
+int		get_no(t_value *value)
 {
-	int				count;
+	int		i;
 
-	count = 1;
-	while (n > 9)
-	{
-		n = (n - (n % 10)) / 10;
-		count++;
-	}
-	return (count);
-}
-
-char					*ft_utoa(unsigned int n)
-{
-	char			*dst;
-	int				i;
-	int				count;
-
-	count = u_count_digit(n);
-	dst = ft_strnew(count);
-	i = count - 1;
-	while (i >= 0)
-	{
-		dst[i] = n % 10 + 48;
-		n = (n - (n % 10)) / 10;
-		i--;
-	}
-	return (dst);
+	i = 0;
+	value->val.str = ft_strnew(2);
+	value->val.str[0] = value->conversion;
+	i += print_str(*value);
+	return (i);
 }

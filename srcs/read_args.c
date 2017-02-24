@@ -6,7 +6,7 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 15:50:54 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/23 11:55:57 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/24 12:06:07 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,9 @@ int		next_arg(const char *format, int i)
 {
 	int		k;
 
-	k = 0;
 	if (format == NULL || format[0] == '\0')
 		return (0);
-	while (format[i] != '%' || (format[i] == '%' && (format[i + 1] == '%' || format[i + 1] == ' ')))
+	while (format[i] != '%' || (format[i] == '%' && GO_NEXT))
 	{
 		if (format[i] == '\0')
 			return (i);
@@ -47,7 +46,7 @@ int		next_arg(const char *format, int i)
 				k++;
 			if (format[i + k] == '%')
 				i = i + k;
-			else 
+			else
 				return (i);
 		}
 		i++;

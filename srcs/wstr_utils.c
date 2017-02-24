@@ -6,13 +6,13 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 22:35:34 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/21 16:53:51 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/24 12:01:06 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int		ft_wstrlen_t(wchar_t *wstr_t)
+int				ft_wstrlen_t(wchar_t *wstr_t)
 {
 	int		i;
 
@@ -24,7 +24,7 @@ int		ft_wstrlen_t(wchar_t *wstr_t)
 	return (i);
 }
 
-char	*justify_zeros(char *small)
+char			*justify_zeros(char *small)
 {
 	int		i;
 	char	*new;
@@ -37,7 +37,7 @@ char	*justify_zeros(char *small)
 	return (new);
 }
 
-char	*add_zeros(char *small, int nb)
+char			*add_zeros(char *small, int nb)
 {
 	int		len;
 	char	*new;
@@ -63,7 +63,30 @@ char	*add_zeros(char *small, int nb)
 	return (new);
 }
 
-char	*fill_bits(char *big, char *small)
+static char		*fill_bits2(int len, char *big, char *small)
+{
+	int		i;
+	int		j;
+	char	*new;
+
+	i = 0;
+	j = 0;
+	new = ft_strnew(len);
+	while (i < len)
+	{
+		if (big[i] == 'x')
+		{
+			new[i] = small[j];
+			j++;
+		}
+		else
+			new[i] = big[i];
+		i++;
+	}
+	return (new);
+}
+
+char			*fill_bits(char *big, char *small)
 {
 	int		i;
 	int		j;
@@ -80,20 +103,7 @@ char	*fill_bits(char *big, char *small)
 		i++;
 	}
 	small = add_zeros(small, j);
-	new = ft_strnew(big_len);
-	i = 0;
-	j = 0;
-	while (i < big_len)
-	{
-		if (big[i] == 'x')
-		{
-			new[i] = small[j];
-			j++;
-		}
-		else
-			new[i] = big[i];
-		i++;
-	}
+	new = fill_bits2(big_len, big, small);
 	free(small);
 	return (new);
 }

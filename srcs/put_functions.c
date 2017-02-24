@@ -6,7 +6,7 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 15:52:02 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/22 11:56:02 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/24 13:13:15 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ int		put_precision(const char *format, t_value *value, int i, va_list argp)
 int		put_modifier(const char *format, t_value *value, int i)
 {
 	value->modifier = '.';
-	if (format[i] == 'h' || format[i] == 'l' || format[i] == 'j' || format[i] == 'z')
+	if (format[i] == 'h' || format[i] == 'l' \
+						|| format[i] == 'j' || format[i] == 'z')
 	{
 		value->modifier = format[i];
 		i++;

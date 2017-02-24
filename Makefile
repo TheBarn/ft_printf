@@ -6,7 +6,7 @@
 #    By: barnout <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/09 20:20:32 by barnout           #+#    #+#              #
-#    Updated: 2017/02/03 21:08:49 by barnout          ###   ########.fr        #
+#    Updated: 2017/02/23 16:15:54 by barnout          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,22 @@ SRC_BASE=	ft_atoi.c		\
 			ft_putchar_fd.c	\
 			ft_putstr_fd.c	\
 			ft_putendl_fd.c	\
-			ft_putnbr_fd.c	
+			ft_putnbr_fd.c	\
+			../srcs/ft_printf.c \
+			../srcs/conversion_functions.c \
+			../srcs/conversion_utils.c \
+			../srcs/conversion_wstr.c \
+			../srcs/flags.c \
+			../srcs/ft_ltoa.c \
+			../srcs/ft_printf.c \
+			../srcs/get_functions.c \
+			../srcs/precision.c \
+			../srcs/print_functions.c \
+			../srcs/put_functions.c \
+			../srcs/read_args.c \
+			../srcs/utils.c \
+			../srcs/wstr_utils.c
+				
 
 OBJS	=	$(addprefix $(OBJ_DIR)/, $(SRC_BASE:.c=.o))
 
@@ -91,6 +106,6 @@ $(NAME)	:	$(OBJS)
 			$(AR) $(LIB).a $(OBJS)
 
 fclean	:	clean
-			$(RM) $(NAME)
+			$(RM) $(NAME).a
 
 re		:	fclean all
