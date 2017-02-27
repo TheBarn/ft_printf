@@ -6,11 +6,12 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 10:50:50 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/24 14:40:07 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/24 17:32:11 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+#include "../includes/define.h"
 
 char	*long_conversion(t_value value)
 {

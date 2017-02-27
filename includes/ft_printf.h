@@ -6,18 +6,14 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/31 17:55:31 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/24 14:46:50 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/27 16:34:55 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdarg.h>
-# include <limits.h>
+# include "value.h"
 # include "../libft/libft.h"
 
 int				ft_printf(const char *restrict format, ...);
@@ -64,8 +60,6 @@ int				get_char(t_value *value, va_list argp);
 int				get_no(t_value *value);
 int				get_ptr(t_value *value, va_list argp);
 int				ft_wstrlen_t(wchar_t *wstr_t);
-char			*binary_conversion(char *hex);
-char			*utf8_conversion(char *small);
 char			*int_conversion(t_value value);
 char			*char_conversion(t_value value);
 char			*short_conversion(t_value value);
@@ -92,7 +86,8 @@ char			*justify_zeros(char *small);
 int				ft_wstrlen_t(wchar_t *wstr_t);
 unsigned char	str_to_hex(char *str);
 char			*hex_to_binary(char h);
-char			binary_to_hex(char *bi);
+char			*binary_to_hex(char *bi);
+char			*bits_canvas(int bits);
 char			*swap_minus(char *str);
 int				wchar_to_bytes(t_value value, int i, int count_bytes, \
 		char **str);

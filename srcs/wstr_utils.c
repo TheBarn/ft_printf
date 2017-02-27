@@ -6,7 +6,7 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 22:35:34 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/24 12:01:06 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/27 16:06:41 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char			*justify_zeros(char *small)
 	while (small[i] == '0')
 		i++;
 	new = ft_strdup(&small[i]);
-	free(small);
+	ft_strdel(&small);
 	return (new);
 }
 
@@ -59,7 +59,7 @@ char			*add_zeros(char *small, int nb)
 		i++;
 		j++;
 	}
-	free(small);
+	ft_strdel(&small);
 	return (new);
 }
 
@@ -104,6 +104,7 @@ char			*fill_bits(char *big, char *small)
 	}
 	small = add_zeros(small, j);
 	new = fill_bits2(big_len, big, small);
-	free(small);
+	ft_strdel(&big);
+	ft_strdel(&small);
 	return (new);
 }

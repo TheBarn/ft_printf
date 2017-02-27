@@ -6,7 +6,7 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 15:47:56 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/23 14:26:29 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/27 15:35:24 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,13 @@ char	*shrtconversion(unsigned short nb, int base)
 	char	*str;
 	int		rem;
 
-	str = NULL;
+	str = ft_strnew(1);
 	rem = -1;
 	if (nb == 0)
-		return ("0");
+	{
+		free(str);
+		str = ft_strdup("0");
+	}
 	while (nb != 0)
 	{
 		rem = nb % base;
@@ -38,10 +41,13 @@ char	*conversion(unsigned int nb, int base)
 	char	*str;
 	int		rem;
 
-	str = NULL;
+	str = ft_strnew(1);
 	rem = -1;
 	if (nb == 0)
-		return ("0");
+	{
+		free(str);
+		str = ft_strdup("0");
+	}
 	while (nb != 0)
 	{
 		rem = nb % base;
@@ -59,10 +65,13 @@ char	*jconversion(uintmax_t nb, int base)
 	char	*str;
 	int		rem;
 
-	str = NULL;
+	str = ft_strnew(1);
 	rem = -1;
 	if (nb == 0)
-		return ("0");
+	{
+		free(str);
+		str = ft_strdup("0");
+	}
 	while (nb != 0)
 	{
 		rem = nb % base;

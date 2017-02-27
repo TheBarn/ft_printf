@@ -6,11 +6,12 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 15:50:54 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/24 12:06:07 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/24 17:29:10 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+#include "../includes/define.h"
 
 int		analyze_arg(const char *format, t_value *value, int i, va_list argp)
 {

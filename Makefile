@@ -6,92 +6,95 @@
 #    By: barnout <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/09 20:20:32 by barnout           #+#    #+#              #
-#    Updated: 2017/02/23 16:15:54 by barnout          ###   ########.fr        #
+#    Updated: 2017/02/27 17:11:59 by barnout          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	libftprintf
+NAME	=	libftprintf.a
 
-PATH	=	libft/
+SRC_BASE=	libft/ft_atoi.c		\
+			libft/ft_bzero.c	\
+			libft/ft_isalnum.c	\
+			libft/ft_isalpha.c	\
+			libft/ft_isascii.c	\
+			libft/ft_isdigit.c	\
+			libft/ft_isprint.c	\
+			libft/ft_memccpy.c	\
+			libft/ft_memchr.c	\
+			libft/ft_memcmp.c	\
+			libft/ft_memcpy.c	\
+			libft/ft_memccpy.c	\
+			libft/ft_memmove.c	\
+			libft/ft_memset.c	\
+			libft/ft_putchar.c	\
+			libft/ft_putnbr.c	\
+			libft/ft_putstr.c	\
+			libft/ft_strcat.c	\
+			libft/ft_strchr.c	\
+			libft/ft_strcpy.c	\
+			libft/ft_strdup.c	\
+			libft/ft_strlcat.c	\
+			libft/ft_strlen.c	\
+			libft/ft_strncat.c	\
+			libft/ft_strcmp.c	\
+			libft/ft_strncmp.c	\
+			libft/ft_strncpy.c	\
+			libft/ft_strnstr.c	\
+			libft/ft_strrchr.c	\
+			libft/ft_strstr.c	\
+			libft/ft_tolower.c	\
+			libft/ft_toupper.c	\
+			libft/ft_memalloc.c	\
+			libft/ft_memdel.c	\
+			libft/ft_strnew.c	\
+			libft/ft_strdel.c	\
+			libft/ft_strclr.c	\
+			libft/ft_striter.c	\
+			libft/ft_striteri.c	\
+			libft/ft_strmap.c	\
+			libft/ft_strmapi.c	\
+			libft/ft_strequ.c	\
+			libft/ft_strnequ.c	\
+			libft/ft_strsub.c	\
+			libft/ft_strjoin.c	\
+			libft/ft_strtrim.c	\
+			libft/ft_strsplit.c	\
+			libft/ft_itoa.c		\
+			libft/ft_putendl.c	\
+			libft/ft_putchar_fd.c	\
+			libft/ft_putstr_fd.c	\
+			libft/ft_putendl_fd.c	\
+			libft/ft_putnbr_fd.c	\
+			srcs/ft_printf.c \
+			srcs/conversion_functions.c \
+			srcs/conversion_functions2.c \
+			srcs/conversion_utils.c \
+			srcs/conversion_wstr.c \
+			srcs/conversion_wstr2.c \
+			srcs/flags.c \
+			srcs/ft_ltoa.c \
+			srcs/ft_imaxtoa.c \
+			srcs/ft_printf.c \
+			srcs/get_functions.c \
+			srcs/get_functions2.c \
+			srcs/get_functions3.c \
+			srcs/precision.c \
+			srcs/padding.c \
+			srcs/print_functions.c \
+			srcs/print_functions2.c \
+			srcs/print_functions3.c \
+			srcs/put_functions.c \
+			srcs/read_args.c \
+			srcs/utils.c \
+			srcs/utils2.c \
+			srcs/wstr_utils.c \
+			srcs/swap_minus.c
 
-OBJ_DIR	=	libft
-
-SRC_BASE=	ft_atoi.c		\
-			ft_bzero.c		\
-			ft_isalnum.c	\
-			ft_isalpha.c	\
-			ft_isascii.c	\
-			ft_isdigit.c	\
-			ft_isprint.c	\
-			ft_memccpy.c	\
-			ft_memchr.c		\
-			ft_memcmp.c		\
-			ft_memcpy.c		\
-			ft_memccpy.c	\
-			ft_memmove.c	\
-			ft_memset.c		\
-			ft_putchar.c	\
-			ft_putnbr.c		\
-			ft_putstr.c		\
-			ft_strcat.c		\
-			ft_strchr.c		\
-			ft_strcpy.c		\
-			ft_strdup.c		\
-			ft_strlcat.c	\
-			ft_strlen.c		\
-			ft_strncat.c	\
-			ft_strcmp.c		\
-			ft_strncmp.c	\
-			ft_strncpy.c	\
-			ft_strnstr.c	\
-			ft_strrchr.c	\
-			ft_strstr.c		\
-			ft_tolower.c	\
-			ft_toupper.c	\
-			ft_memalloc.c	\
-			ft_memdel.c		\
-			ft_strnew.c		\
-			ft_strdel.c		\
-			ft_strclr.c		\
-			ft_striter.c	\
-			ft_striteri.c	\
-			ft_strmap.c		\
-			ft_strmapi.c	\
-			ft_strequ.c		\
-			ft_strnequ.c	\
-			ft_strsub.c		\
-			ft_strjoin.c	\
-			ft_strtrim.c	\
-			ft_strsplit.c	\
-			ft_itoa.c		\
-			ft_putendl.c	\
-			ft_putchar_fd.c	\
-			ft_putstr_fd.c	\
-			ft_putendl_fd.c	\
-			ft_putnbr_fd.c	\
-			../srcs/ft_printf.c \
-			../srcs/conversion_functions.c \
-			../srcs/conversion_utils.c \
-			../srcs/conversion_wstr.c \
-			../srcs/flags.c \
-			../srcs/ft_ltoa.c \
-			../srcs/ft_printf.c \
-			../srcs/get_functions.c \
-			../srcs/precision.c \
-			../srcs/print_functions.c \
-			../srcs/put_functions.c \
-			../srcs/read_args.c \
-			../srcs/utils.c \
-			../srcs/wstr_utils.c
 				
 
-OBJS	=	$(addprefix $(OBJ_DIR)/, $(SRC_BASE:.c=.o))
+OBJS	=	$(SRC_BASE:.c=.o)
 
 GCC		=	gcc
-
-AR		=	ar rc
-
-LIB		=	libftprintf
 
 CFLAGS	+=	-Wall -Wextra -Werror
 
@@ -99,13 +102,19 @@ RM		=	rm -f
 
 all		:	$(NAME)
 
+%.o: %.c includes/libftprintf.h
+		@gcc -I includes -c $< -o $@
+
+$(NAME)	:	$(OBJS)
+			@ar rc $(NAME) $(OBJS)
+			@ranlib $@
+
 clean	:	
 			$(RM) $(OBJS)
 
-$(NAME)	:	$(OBJS)
-			$(AR) $(LIB).a $(OBJS)
-
 fclean	:	clean
-			$(RM) $(NAME).a
+			$(RM) $(NAME)
 
 re		:	fclean all
+
+.PHONY: clean all re fclean

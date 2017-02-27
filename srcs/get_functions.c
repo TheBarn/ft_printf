@@ -6,11 +6,12 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 21:28:31 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/24 14:46:45 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/24 17:30:59 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+#include "../includes/define.h"
 
 int		get_char(t_value *value, va_list argp)
 {

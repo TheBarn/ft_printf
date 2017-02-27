@@ -6,11 +6,12 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 16:00:46 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/24 14:28:40 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/24 17:30:38 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+#include "../includes/define.h"
 
 void		apply_flag_h(t_value value, char **str)
 {

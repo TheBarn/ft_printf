@@ -6,12 +6,19 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 14:42:46 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/24 14:45:13 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/24 14:58:29 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VALUE_H
 # define VALUE_H
+
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdarg.h>
+# include <limits.h>
+# include "../libft/libft.h"
 
 typedef	struct				s_value
 {

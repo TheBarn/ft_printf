@@ -6,21 +6,11 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 14:27:33 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/24 14:31:29 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/24 18:14:48 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-
-static char	*remove_sign(char *str)
-{
-	char	*new;
-
-	new = ft_strnew(ft_strlen(str) - 1);
-	new = ft_strcat(new, &str[1]);
-	free(str);
-	return (new);
-}
 
 static void	swap_minus2(char **new, char *str, char *toto)
 {

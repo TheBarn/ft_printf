@@ -6,14 +6,12 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/31 17:50:15 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/24 14:21:19 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/27 17:24:13 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-
-//TODO Remove
-#include "locale.h"
+#include "../includes/define.h"
 
 int		ft_putstr_special(char *str)
 {
@@ -121,18 +119,3 @@ int		ft_printf(const char *restrict format, ...)
 	va_end(argp);
 	return (toto);
 }
-/*
-int		main()
-{
-	int	lol;
-	char *format = "%010d";
-	int		i;
-//	 L"我是一只猫。");
-	i = 42;
-	setlocale(LC_ALL, "");
-	lol = ft_printf(format, i);
-	printf("\nvalue of ft_printf is %d\n", lol);
-	lol = printf(format, i);
-	printf("\nvalue of printf is %d\n", lol);
-	return (0);
-}*/

@@ -6,11 +6,12 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 10:19:15 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/24 10:21:48 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/27 16:05:36 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+#include "../includes/define.h"
 
 int		get_size_t(t_value *value, va_list argp)
 {
@@ -63,6 +64,8 @@ int		get_str(t_value *value, va_list argp)
 		ft_putchar('\0');
 		i++;
 	}
+	if (AS_C)
+		free(value->val.str);
 	return (i);
 }
 
@@ -89,6 +92,8 @@ int		get_wstr(t_value *value, va_list argp)
 		}
 	}
 	i += print_wstr(*value);
+	if (AS_WC || AS_C)
+		free(value->val.wstr);
 	return (i);
 }
 

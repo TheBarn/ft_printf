@@ -6,11 +6,12 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 14:24:10 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/24 14:28:57 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/27 17:19:14 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+#include "../includes/define.h"
 
 static void	left_padding(t_value value, char **str, char *padding, int diff)
 {
@@ -69,6 +70,7 @@ void		apply_flag_p(t_value value, char **str, char padding, int len)
 	{
 		*str = add_to_the_left(*str, '+');
 		toto = 1;
+		len++;
 	}
 	if (value.width > len)
 		*str = add_padding(value, *str, padding, len);

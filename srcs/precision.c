@@ -6,33 +6,32 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 15:44:11 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/24 13:09:14 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/27 13:37:37 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+#include "../includes/define.h"
 
 char	*add_to_the_right(char *str, char c)
 {
 	char	*new;
-	int		lol;
 
-	lol = ft_strlen(str) + 1;
-	new = ft_strnew(ft_strlen(str) + 1);
+	new = ft_strnew(ft_strlen(str) + 2);
 	ft_strcat(new, str);
 	new[ft_strlen(str)] = c;
+	ft_strdel(&str);
 	return (new);
 }
 
 char	*add_to_the_left(char *str, char c)
 {
 	char	*new;
-	int		lol;
 
-	lol = ft_strlen(str) + 1;
-	new = ft_strnew(ft_strlen(str) + 1);
+	new = ft_strnew(ft_strlen(str) + 2);
 	new[0] = c;
 	ft_strcat(new, str);
+	ft_strdel(&str);
 	return (new);
 }
 
@@ -68,7 +67,7 @@ char	*apply_precision(t_value value, char *str)
 	{
 		tmp = str;
 		str = ft_strnew(value.precision + 1);
-		str = ft_strncpy(str, tmp, value.precision);
+		ft_strncpy(str, tmp, value.precision);
 	}
 	return (str);
 }

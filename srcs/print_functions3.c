@@ -6,7 +6,7 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 10:35:34 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/24 10:43:24 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/27 15:09:07 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@ int		print_str(t_value value)
 	int		total;
 	char	*str;
 
-	str = value.val.str;
+	str = ft_strdup(value.val.str);
 	if (is_cv(value.conversion) == 1)
 		str = apply_precision(value, str);
 	str = apply_flags(value, str);
 	ft_putstr(str);
 	total = ft_strlen(str);
+	free(str);
 	return (total);
 }
 
@@ -72,6 +73,7 @@ int		print_wstr(t_value value)
 	}
 	str = apply_flags(value, str);
 	toto += print_wchar(str, value);
+	free(str);
 	return (toto);
 }
 
@@ -87,5 +89,6 @@ int		print_ptr(t_value value)
 	str = apply_flags(value, str);
 	ft_putstr(str);
 	total = ft_strlen(str);
+	free(str);
 	return (total);
 }

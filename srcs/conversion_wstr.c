@@ -6,96 +6,121 @@
 /*   By: barnout <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 15:09:25 by barnout           #+#    #+#             */
-/*   Updated: 2017/02/24 11:10:47 by barnout          ###   ########.fr       */
+/*   Updated: 2017/02/27 16:09:57 by barnout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
+char			*bits_canvas(int bits)
+{
+	char	*big;
+
+	if (bits > 0 && bits < 8)
+		big = ft_strdup("0xxxxxxx");
+	if (bits > 7 && bits < 12)
+		big = ft_strdup("110xxxxx10xxxxxx");
+	if (bits > 11 && bits < 17)
+		big = ft_strdup("1110xxxx10xxxxxx10xxxxxx");
+	if (bits > 16 && bits < 22)
+		big = ft_strdup("11110xxx10xxxxxx10xxxxxx10xxxxxx");
+	return (big);
+}
+
 static char		*hex_to_binary2(char h)
 {
+	char	*str;
+
 	if (h == '8')
-		return ("1000");
+		str = ft_strdup("1000");
 	else if (h == '9')
-		return ("1001");
+		str = ft_strdup("1001");
 	else if (h == 'a')
-		return ("1010");
+		str = ft_strdup("1010");
 	else if (h == 'b')
-		return ("1011");
+		str = ft_strdup("1011");
 	else if (h == 'c')
-		return ("1100");
+		str = ft_strdup("1100");
 	else if (h == 'd')
-		return ("1101");
+		str = ft_strdup("1101");
 	else if (h == 'e')
-		return ("1110");
+		str = ft_strdup("1110");
 	else if (h == 'f')
-		return ("1111");
+		str = ft_strdup("1111");
 	else
-		return ("error");
+		str = ft_strdup("0000");
+	return (str);
 }
 
 char			*hex_to_binary(char h)
 {
+	char	*str;
+
 	if (h == '0')
-		return ("0000");
+		str = ft_strdup("0000");
 	else if (h == '1')
-		return ("0001");
+		str = ft_strdup("0001");
 	else if (h == '2')
-		return ("0010");
+		str = ft_strdup("0010");
 	else if (h == '3')
-		return ("0011");
+		str = ft_strdup("0011");
 	else if (h == '4')
-		return ("0100");
+		str = ft_strdup("0100");
 	else if (h == '5')
-		return ("0101");
+		str = ft_strdup("0101");
 	else if (h == '6')
-		return ("0110");
+		str = ft_strdup("0110");
 	else if (h == '7')
-		return ("0111");
+		str = ft_strdup("0111");
 	else
-		return (hex_to_binary2(h));
+		str = hex_to_binary2(h);
+	return (str);
 }
 
-static char		binary_to_hex2(char *bi)
+static void		binary_to_hex2(char *bi, char **c)
 {
 	if (ft_strncmp(bi, "1000", 4) == 0)
-		return ('8');
+		*c = ft_memcpy(*c, "8", 1);
 	else if (ft_strncmp(bi, "1001", 4) == 0)
-		return ('9');
+		*c = ft_memcpy(*c, "9", 1);
 	else if (ft_strncmp(bi, "1010", 4) == 0)
-		return ('a');
+		*c = ft_memcpy(*c, "a", 1);
 	else if (ft_strncmp(bi, "1011", 4) == 0)
-		return ('b');
+		*c = ft_memcpy(*c, "b", 1);
 	else if (ft_strncmp(bi, "1100", 4) == 0)
-		return ('c');
+		*c = ft_memcpy(*c, "c", 1);
 	else if (ft_strncmp(bi, "1101", 4) == 0)
-		return ('d');
+		*c = ft_memcpy(*c, "d", 1);
 	else if (ft_strncmp(bi, "1110", 4) == 0)
-		return ('e');
+		*c = ft_memcpy(*c, "e", 1);
 	else if (ft_strncmp(bi, "1111", 4) == 0)
-		return ('f');
+		*c = ft_memcpy(*c, "f", 1);
 	else
-		return ('?');
+		*c = ft_memcpy(*c, "0", 1);
 }
 
-char			binary_to_hex(char *bi)
+char			*binary_to_hex(char *bi)
 {
+	char	*c;
+
+	c = ft_strnew(2);
 	if (ft_strncmp(bi, "0000", 4) == 0)
-		return ('0');
+		c = ft_memcpy(c, "0", 1);
 	else if (ft_strncmp(bi, "0001", 4) == 0)
-		return ('1');
+		c = ft_memcpy(c, "1", 1);
 	else if (ft_strncmp(bi, "0010", 4) == 0)
-		return ('2');
+		c = ft_memcpy(c, "2", 1);
 	else if (ft_strncmp(bi, "0011", 4) == 0)
-		return ('3');
+		c = ft_memcpy(c, "3", 1);
 	else if (ft_strncmp(bi, "0100", 4) == 0)
-		return ('4');
+		c = ft_memcpy(c, "4", 1);
 	else if (ft_strncmp(bi, "0101", 4) == 0)
-		return ('5');
+		c = ft_memcpy(c, "5", 1);
 	else if (ft_strncmp(bi, "0110", 4) == 0)
-		return ('6');
+		c = ft_memcpy(c, "6", 1);
 	else if (ft_strncmp(bi, "0111", 4) == 0)
-		return ('7');
+		c = ft_memcpy(c, "7", 1);
 	else
-		return (binary_to_hex2(bi));
+		binary_to_hex2(bi, &c);
+	return (c);
 }
